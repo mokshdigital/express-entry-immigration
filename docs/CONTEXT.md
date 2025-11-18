@@ -14,7 +14,7 @@
 - [ ] Phase 5: API integration
 - [ ] Phase 6: Core layout & components
 - [ ] Phase 7: Page development
-- [ ] Phase 8: Advanced features
+<!-- - [ ] Phase 8: Advanced features -->
 - [ ] Phase 9: Testing & optimization
 - [ ] Phase 10: Deployment
 - [ ] Phase 11: Client handoff
@@ -23,7 +23,8 @@
 - WordPress URL: https://cms.expressentryimmigration.ca
 - WordPress Version: [6.8.3]
 - Frontend: Not yet initialized
-- GitHub Repo: [eeis](https://github.com/mokshdigital/eeis)
+- GitHub Repo: [https://github.com/mokshdigital/express-entry-immigration]
+
 
 ## Active Decisions
 - Using WordPress REST API (not GraphQL)
