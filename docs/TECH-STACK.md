@@ -9,8 +9,8 @@
 - **Node Version:** 24.11.0
 
 ### Styling
-- **CSS Framework:** Tailwind CSS 3.x
-- **Component Library:** shadcn/ui
+- **CSS Framework:** Tailwind CSS 3.4.1 (downgraded from v4 for shadcn/ui compatibility)
+- **Component Library:** shadcn
 - **Animation:** Framer Motion
 - **Fonts:** Google Fonts (Montserrat, Open Sans via next/font)
 
