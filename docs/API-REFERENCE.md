@@ -121,3 +121,21 @@ GET /acf/v3/options/site_settings
 ---
 
 **This document will be updated in Phase 3 with actual endpoint URLs and data structures after ACF setup.**
+
+## Actual Endpoint URLS
+
+# Custom Posts
+
+- Stats: https://cms.expressentryimmigration.ca/wp-json/wp/v2/stats
+- Services: https://cms.expressentryimmigration.ca/wp-json/wp/v2/services
+- Testimonials: https://cms.expressentryimmigration.ca/wp-json/wp/v2/testimonials
+- FAQs: https://cms.expressentryimmigration.ca/wp-json/wp/v2/faqs
+
+# Options
+- Hero Settings: https://cms.expressentryimmigration.ca/wp-json/acf/v3/options/hero-settings
+- Site Settings: https://cms.expressentryimmigration.ca/wp-json/acf/v3/options/site-settings
+- Navigation Settings: https://cms.expressentryimmigration.ca/wp-json/acf/v3/options/navigation-settings
+- Social Links: https://cms.expressentryimmigration.ca/wp-json/acf/v3/options/social-links
+- SEO Settings: https://cms.expressentryimmigration.ca/wp-json/acf/v3/options/seo-settings
+- Contact Settings: https://cms.expressentryimmigration.ca/wp-json/acf/v3/options/contact-settings
+
