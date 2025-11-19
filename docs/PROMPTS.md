@@ -4,7 +4,7 @@ This document contains proven prompts to use with Cursor/Claude throughout the p
 
 ## General Context-Setting Prompt
 
-Use this at the START of every Cursor session:
+Use this at the START of every AntiGravity session:
 
 I'm working on the Express Entry Immigration website project. Here's my current context:
 [Copy entire CONTEXT.md file here]
@@ -120,6 +120,7 @@ What's causing this and how do I fix it?
 ## Context Preservation Template
 
 When starting a new session after a break:
+
 I'm resuming work on the Express Entry Immigration project.
 Current Status:
 
@@ -134,8 +135,41 @@ Backend: WordPress Headless
 Current issue: [if any]
 
 Project structure:
-[Brief overview or paste tree output]
-Now I need to: [specific task]
+express-entry-immigration/
+├── frontend/                    # Next.js application
+│   ├── src/
+│   │   ├── app/                # App router pages
+│   │   ├── components/         # React components
+│   │   ├── lib/               # Utilities, API calls
+│   │   ├── styles/            # Global styles
+│   │   └── types/             # TypeScript types
+│   ├── public/                # Static assets
+│   ├── .env.local             # Environment variables (not committed)
+│   ├── .env.example           # Example env file (committed)
+│   ├── next.config.js
+│   ├── tailwind.config.js
+│   └── package.json
+├── docs/                       # Project documentation
+│   ├── CONTEXT.md             # Current project state
+│   ├── TECH-STACK.md          # Tech decisions
+│   ├── API-REFERENCE.md       # WordPress API docs
+│   ├── PHASE-LOG.md           # Phase completion tracker
+│   ├── PROMPTS.md             # Effective AI prompts
+│   └── HANDOFF.md             # Client documentation
+├── wordpress-setup/            # WordPress configuration guides
+│   ├── plugins-list.md
+│   ├── acf-fields-export.json
+│   └── setup-checklist.md
+├── .gitignore
+└── README.md
+
+I'm working on the Express Entry Immigration website project. Here's my current context:
+
+[Copy entire CONTEXT.md file here]
+
+I'm currently working on [specific task]. Can you help me with [specific question]?
+
+
 
 ## Component Request Template
 Create a [component name] component with these specifications:

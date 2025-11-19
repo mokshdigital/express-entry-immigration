@@ -31,24 +31,19 @@
 ## Backend Stack (WordPress)
 
 ### Core
-- **CMS:** WordPress 6.4+
+- **CMS:** WordPress 6.8.3+
 - **Hosting:** Hostinger Agency Plan (Shared)
 - **URL:** cms.expressentryimmigration.ca
 - **API:** WordPress REST API (built-in)
 
 ### Plugins (Essential)
 1. **Advanced Custom Fields (Free)** - Custom content fields
-2. **ACF to REST API** - Expose ACF fields to REST API
-3. **Rank Math SEO** - SEO management
-4. **Classic Editor** - Simplified editing experience
-5. **Wordfence Security** - Security hardening
-6. **LiteSpeed Cache** - Performance caching
-
-### Plugins (Optional)
-- WP Mail SMTP - Reliable email delivery
+2. **Rank Math SEO** - SEO management
+3. **Classic Editor** - Simplified editing experience
+4. **LiteSpeed Cache** - Performance caching
 
 ### Content Structure
-- **Custom Post Types:** Services, Testimonials, FAQs, News/Blog
+- **Custom Post Types:** Services, Testimonials, FAQs, Blogs
 - **Custom Fields:** Via ACF (hero settings, stats, contact info, etc.)
 
 ## Hosting & Deployment
@@ -112,12 +107,6 @@
 - Excellent documentation
 - AI tools know it well
 - Performance optimized
-
-### Why ACF Free (not PRO)?
-- Sufficient for project needs
-- Can upgrade later if needed
-- Cost-effective starting point
-- Seamless upgrade path
 
 ### Why Rank Math (not Yoast)?
 - More features in free version
