@@ -26,13 +26,6 @@ Required plugins for Express Entry Immigration Services headless CMS.
 - **Fallback:** WP Super Cache if LiteSpeed not compatible
 - **Configuration:** Phase 2
 
-## Optional Plugins (Install if needed)
-
-### WP Mail SMTP
-- **Purpose:** Reliable email delivery for WordPress forms
-- **When:** If WordPress email delivery is unreliable
-- **Configuration:** SMTP settings from hosting provider
-
 ## Plugin Installation Order
 
 1. Advanced Custom Fields
