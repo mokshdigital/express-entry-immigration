@@ -5,9 +5,13 @@ import Link from 'next/link';
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { navigationMenu, type NavItem } from '@/lib/navigation';
+import { type NavItem } from '@/lib/navigation';
 
-export function MobileMenu() {
+interface MobileMenuProps {
+    menu: NavItem[];
+}
+
+export function MobileMenu({ menu }: MobileMenuProps) {
     const [open, setOpen] = useState(false);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
@@ -80,7 +84,7 @@ export function MobileMenu() {
                     </button>
                 </div>
                 <nav className="flex flex-col space-y-2">
-                    {navigationMenu.map(item => renderMenuItem(item))}
+                    {menu.map(item => renderMenuItem(item))}
                 </nav>
             </SheetContent>
         </Sheet>

@@ -5,17 +5,20 @@ import {
     getContactSettings,
     getSocialLinks,
     getSiteSettings,
+    getServices,
 } from '@/lib/api';
-import { getServiceCategories } from '@/lib/navigation';
+import { buildNavigation, getServiceCategories } from '@/lib/navigation';
 
 export async function Footer() {
-    const [contactSettings, socialLinks, siteSettings] = await Promise.all([
+    const [contactSettings, socialLinks, siteSettings, services] = await Promise.all([
         getContactSettings(),
         getSocialLinks(),
         getSiteSettings(),
+        getServices(),
     ]);
 
-    const serviceCategories = getServiceCategories();
+    const menu = buildNavigation(services);
+    const serviceCategories = getServiceCategories(menu);
     const currentYear = new Date().getFullYear();
 
     return (
@@ -58,7 +61,7 @@ export async function Footer() {
                                 <div className="flex items-start space-x-2 text-sm">
                                     <MapPin className="h-4 w-4 mt-0.5 text-brand-navy" />
                                     <address className="not-italic">
-                                        {contactSettings.address.split('\\n').map((line, i) => (
+                                        {contactSettings.address.split('\n').map((line, i) => (
                                             <span key={i} className="block">
                                                 {line}
                                             </span>

@@ -3,14 +3,19 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { DesktopMenu } from './DesktopMenu';
 import { MobileMenu } from './MobileMenu';
-import { getSiteSettings, getNavigationSettings } from '@/lib/api';
+import { getSiteSettings, getNavigationSettings, getServices } from '@/lib/api';
+import { buildNavigation } from '@/lib/navigation';
 
 export async function Header() {
-    // Fetch site settings and navigation settings from WordPress
-    const [siteSettings, navSettings] = await Promise.all([
+    // Fetch site settings, navigation settings, and services from WordPress
+    const [siteSettings, navSettings, services] = await Promise.all([
         getSiteSettings(),
         getNavigationSettings(),
+        getServices(),
     ]);
+
+    // Build dynamic navigation menu
+    const menu = buildNavigation(services);
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -21,18 +26,18 @@ export async function Header() {
                         <Image
                             src={siteSettings.site_logo_url}
                             alt={siteSettings.site_name}
-                            width={150}
-                            height={40}
-                            className="h-10 w-auto"
+                            width={180}
+                            height={50}
+                            className="h-10 w-auto object-contain"
                             priority
                         />
                     )}
                 </Link>
 
                 {/* Desktop Navigation */}
-                <DesktopMenu />
+                <DesktopMenu menu={menu} />
 
-                {/* CTA Button */}
+                {/* CTA & Mobile Menu */}
                 <div className="flex items-center space-x-4">
                     <Button
                         asChild
@@ -44,7 +49,7 @@ export async function Header() {
                     </Button>
 
                     {/* Mobile Menu Toggle */}
-                    <MobileMenu />
+                    <MobileMenu menu={menu} />
                 </div>
             </div>
         </header>

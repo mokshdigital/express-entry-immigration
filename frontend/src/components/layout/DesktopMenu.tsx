@@ -3,9 +3,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
-import { navigationMenu, type NavItem } from '@/lib/navigation';
+import { type NavItem } from '@/lib/navigation';
 
-export function DesktopMenu() {
+interface DesktopMenuProps {
+    menu: NavItem[];
+}
+
+export function DesktopMenu({ menu }: DesktopMenuProps) {
     const [openMenu, setOpenMenu] = useState<string | null>(null);
 
     const handleMouseEnter = (label: string) => {
@@ -18,7 +22,7 @@ export function DesktopMenu() {
 
     return (
         <nav className="hidden lg:flex items-center space-x-8">
-            {navigationMenu.map((item) => {
+            {menu.map((item) => {
                 const hasChildren = item.children && item.children.length > 0;
                 const isOpen = openMenu === item.label;
 

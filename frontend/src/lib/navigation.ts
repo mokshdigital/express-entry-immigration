@@ -2,6 +2,7 @@
  * Navigation menu structure for Express Entry Immigration
  * This defines the complete site navigation including mega menu items
  */
+import { Service } from '@/types/wordpress';
 
 export interface NavItem {
     label: string;
@@ -10,7 +11,8 @@ export interface NavItem {
     description?: string;
 }
 
-export const navigationMenu: NavItem[] = [
+// Base navigation structure (without dynamic services)
+export const baseNavigation: NavItem[] = [
     {
         label: 'Home',
         href: '/',
@@ -22,154 +24,7 @@ export const navigationMenu: NavItem[] = [
     {
         label: 'Services',
         href: '/services',
-        children: [
-            {
-                label: 'Study',
-                href: '/services/study',
-                description: 'Study permits, admissions, and extensions',
-                children: [
-                    {
-                        label: 'Study Permits',
-                        href: '/services/study#study-permits'
-                    },
-                    {
-                        label: 'School Admissions',
-                        href: '/services/study#admissions'
-                    },
-                    {
-                        label: 'Study Permit Extensions',
-                        href: '/services/study#extensions'
-                    },
-                ],
-            },
-            {
-                label: 'Work',
-                href: '/services/work',
-                description: 'Work permits and LMIA applications',
-                children: [
-                    {
-                        label: 'LMIA Work Permits',
-                        href: '/services/work#lmia-permits'
-                    },
-                    {
-                        label: 'Open Work Permits',
-                        href: '/services/work#open-permits'
-                    },
-                    {
-                        label: 'LMIA Applications',
-                        href: '/services/work#lmia-support'
-                    },
-                    {
-                        label: 'LMIA-Exempt Permits',
-                        href: '/services/work#lmia-exempt'
-                    },
-                    {
-                        label: 'Work Permit Extensions',
-                        href: '/services/work#extensions'
-                    },
-                    {
-                        label: 'Bridging Open Work Permits',
-                        href: '/services/work#bridging'
-                    },
-                ],
-            },
-            {
-                label: 'Permanent Residency',
-                href: '/services/permanent-residency',
-                description: 'Express Entry, PNP, and sponsorships',
-                children: [
-                    {
-                        label: 'Express Entry',
-                        href: '/services/permanent-residency#express-entry'
-                    },
-                    {
-                        label: 'Provincial Nominee Programs',
-                        href: '/services/permanent-residency#pnp'
-                    },
-                    {
-                        label: 'Rural & Atlantic Immigration',
-                        href: '/services/permanent-residency#rural-atlantic'
-                    },
-                    {
-                        label: 'Caregiver Pathways',
-                        href: '/services/permanent-residency#caregiver'
-                    },
-                    {
-                        label: 'Humanitarian & Compassionate',
-                        href: '/services/permanent-residency#humanitarian'
-                    },
-                    {
-                        label: 'Refugee Claims',
-                        href: '/services/permanent-residency#refugee'
-                    },
-                    {
-                        label: 'Spousal Sponsorships',
-                        href: '/services/permanent-residency#spousal'
-                    },
-                    {
-                        label: 'Parent/Grandparent Sponsorships',
-                        href: '/services/permanent-residency#pgp'
-                    },
-                ],
-            },
-            {
-                label: 'Visitor Visas',
-                href: '/services/visitor-visas',
-                description: 'Tourist visas, Super Visas, and eTAs',
-                children: [
-                    {
-                        label: 'Visitor Visa',
-                        href: '/services/visitor-visas#visitor'
-                    },
-                    {
-                        label: 'Business Visitor Visa',
-                        href: '/services/visitor-visas#business'
-                    },
-                    {
-                        label: 'Super Visa',
-                        href: '/services/visitor-visas#super-visa'
-                    },
-                    {
-                        label: 'eTA',
-                        href: '/services/visitor-visas#eta'
-                    },
-                ],
-            },
-            {
-                label: 'Citizenship & PR Card',
-                href: '/services/citizenship',
-                description: 'Citizenship applications and PR card renewals',
-                children: [
-                    {
-                        label: 'Citizenship Applications',
-                        href: '/services/citizenship#applications'
-                    },
-                    {
-                        label: 'PR Card Renewals',
-                        href: '/services/citizenship#pr-card'
-                    },
-                    {
-                        label: 'Residency Obligation Reviews',
-                        href: '/services/citizenship#residency'
-                    },
-                ],
-            },
-            {
-                label: 'Other Services',
-                href: '/services/other',
-                description: 'Additional immigration services',
-                children: [
-                    { label: 'Indian OCI', href: '/services/other#oci' },
-                    { label: 'Indian Passport Renewal', href: '/services/other#passport' },
-                    { label: 'Indian PCC', href: '/services/other#pcc' },
-                    { label: 'DLI Change', href: '/services/other#dli' },
-                    { label: 'Name Change', href: '/services/other#name-change' },
-                    { label: 'GCMS/ATIP Notes', href: '/services/other#gcms' },
-                    { label: 'US Visa', href: '/services/other#us-visa' },
-                    { label: 'Lost Documents', href: '/services/other#lost-doc' },
-                ],
-            },
-        ],
+        children: [], // Will be populated dynamically
     },
     {
         label: 'News',
@@ -185,9 +40,70 @@ export const navigationMenu: NavItem[] = [
     },
 ];
 
-// Helper function to get all service categories
-export function getServiceCategories(): NavItem[] {
-    const servicesItem = navigationMenu.find(item => item.label === 'Services');
+// Helper to build the full navigation menu with dynamic services
+export function buildNavigation(services: Service[]): NavItem[] {
+    // Group services by category
+    const servicesByCategory: Record<string, Service[]> = {};
+
+    services.forEach(service => {
+        const category = service.acf?.service_category || 'other';
+        if (!servicesByCategory[category]) {
+            servicesByCategory[category] = [];
+        }
+        servicesByCategory[category].push(service);
+    });
+
+    // Define category labels/order
+    const categoryLabels: Record<string, string> = {
+        study: 'Study',
+        work: 'Work',
+        pr: 'Permanent Residency',
+        visitor: 'Visitor Visas',
+        citizenship: 'Citizenship & PR Card',
+        other: 'Other Services'
+    };
+
+    // Desired order of categories
+    const categoryOrder = ['study', 'work', 'pr', 'visitor', 'citizenship', 'other'];
+
+    // Build services menu items
+    const serviceItems: NavItem[] = categoryOrder
+        .filter(category => servicesByCategory[category] && servicesByCategory[category].length > 0)
+        .map(category => {
+            const categoryServices = servicesByCategory[category];
+            const label = categoryLabels[category] || category;
+            const href = `/services/${category}`;
+
+            // Sort services by date (oldest to newest)
+            const sortedServices = [...categoryServices].sort((a, b) => {
+                return new Date(a.date).getTime() - new Date(b.date).getTime();
+            });
+
+            return {
+                label,
+                href,
+                children: sortedServices.map(service => ({
+                    label: service.title.rendered,
+                    href: `/services/${category}`, // Link to category page as requested
+                }))
+            };
+        });
+
+    // Return new navigation array with populated services
+    return baseNavigation.map(item => {
+        if (item.label === 'Services') {
+            return {
+                ...item,
+                children: serviceItems
+            };
+        }
+        return item;
+    });
+}
+
+// Helper function to get all service categories from the built menu
+export function getServiceCategories(menu: NavItem[]): NavItem[] {
+    const servicesItem = menu.find(item => item.label === 'Services');
     return servicesItem?.children || [];
 }
 
