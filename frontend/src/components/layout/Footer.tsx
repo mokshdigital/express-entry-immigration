@@ -31,8 +31,7 @@ export async function Footer() {
                             {siteSettings.site_name}
                         </h3>
                         <p className="text-sm text-gray-600">
-                            Expert Canadian immigration consulting services. Licensed RCIC
-                            consultants helping you achieve your Canadian dream.
+                            Licensed RCIC consultants helping you achieve your Canadian dream.
                         </p>
                         <div className="space-y-2">
                             {contactSettings.phone && (

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Hero from '@/components/sections/Hero';
 import ServicesGrid from '@/components/sections/ServicesGrid';
-import StatsSection from '@/components/sections/StatsSection';
+import { StatsSection } from '@/components/sections/StatsSection';
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
 import FAQsPreview from '@/components/sections/FAQsPreview';
 import {
