@@ -29,8 +29,10 @@ Track completion of each phase with dates and notes.
 - **Issues:** Had to downgrade from Tailwind v4 to v3 for compatibility
 
 ## Phase 5: API Integration
-- **Status:** ⏳ Not Started
-- **Notes:** Create API utilities, test WordPress connection
+- **Status:** ✅ Complete
+- **Completed:** [Nov-19-2025]
+- **Notes:** API integration layer complete, all WordPress endpoints working with ISR
+- **Issues:** ACF endpoint slug mismatch (underscores vs hyphens), getFAQs orderby parameter incompatible with custom post types
 
 ## Phase 6: Core Layout & Components
 - **Status:** ⏳ Not Started
