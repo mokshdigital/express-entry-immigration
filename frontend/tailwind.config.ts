@@ -8,12 +8,26 @@ const config: Config = {
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
+        container: {
+            center: true,
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+            screens: {
+                "2xl": "1400px",
+            },
+        },
         extend: {
             colors: {
+                // Express Entry Immigration brand colors
                 brand: {
-                    navy: "#003366",
-                    red: "#FF0000",
-                    gold: "#FFD700",
+                    navy: "#003366", // Primary navy blue
+                    red: "#FF0000", // Canada red
+                    gold: "#FFD700", // Warm gold accent
                 },
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
@@ -53,6 +67,24 @@ const config: Config = {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+            },
+            fontFamily: {
+                sans: ["var(--font-montserrat)", "sans-serif"],
+                body: ["var(--font-open-sans)", "sans-serif"],
+            },
+            keyframes: {
+                "accordion-down": {
+                    from: { height: "0" },
+                    to: { height: "var(--radix-accordion-content-height)" },
+                },
+                "accordion-up": {
+                    from: { height: "var(--radix-accordion-content-height)" },
+                    to: { height: "0" },
+                },
+            },
+            animation: {
+                "accordion-down": "accordion-down 0.2s ease-out",
+                "accordion-up": "accordion-up 0.2s ease-out",
             },
         },
     },
