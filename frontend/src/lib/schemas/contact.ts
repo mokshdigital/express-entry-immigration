@@ -21,7 +21,7 @@ export const contactFormSchema = z.object({
         'citizenship',
         'other'
     ], {
-        errorMap: () => ({ message: 'Please select a service type' })
+        message: 'Please select a service type'
     }),
 
     message: z.string()
