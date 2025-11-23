@@ -7,16 +7,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarDays, User, ChevronLeft } from 'lucide-react';
+import { CalendarDays, User, ArrowRight } from 'lucide-react';
 import { getPostBySlug, getRecentPosts } from '@/lib/api';
 
 // Generate metadata
 export async function generateMetadata({
     params,
 }: {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-    const post = await getPostBySlug(params.slug);
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
 
     if (!post) {
         return {
@@ -35,10 +36,11 @@ export async function generateMetadata({
 export default async function BlogPostPage({
     params,
 }: {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }) {
+    const { slug } = await params;
     const [post, recentPosts] = await Promise.all([
-        getPostBySlug(params.slug),
+        getPostBySlug(slug),
         getRecentPosts(3),
     ]);
 
@@ -55,15 +57,34 @@ export default async function BlogPostPage({
 
     return (
         <main>
-            {/* Back Button */}
-            <div className="bg-gray-50 py-4">
+            {/* Breadcrumbs */}
+            <div className="bg-gray-50 py-4 border-b">
                 <div className="container">
-                    <Button asChild variant="ghost" size="sm">
-                        <Link href="/news">
-                            <ChevronLeft className="h-4 w-4 mr-1" />
-                            Back to News
-                        </Link>
-                    </Button>
+                    <nav className="flex text-sm text-gray-500" aria-label="Breadcrumb">
+                        <ol className="inline-flex items-center space-x-1 md:space-x-3">
+                            <li className="inline-flex items-center">
+                                <Link href="/" className="hover:text-brand-navy transition-colors">
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <div className="flex items-center">
+                                    <span className="mx-2">/</span>
+                                    <Link href="/news" className="hover:text-brand-navy transition-colors">
+                                        Latest Updates
+                                    </Link>
+                                </div>
+                            </li>
+                            <li aria-current="page">
+                                <div className="flex items-center">
+                                    <span className="mx-2">/</span>
+                                    <span className="text-gray-900 font-medium line-clamp-1 max-w-[200px] md:max-w-none">
+                                        {post.title.rendered}
+                                    </span>
+                                </div>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
 
@@ -117,9 +138,10 @@ export default async function BlogPostPage({
                             <p className="mb-6 opacity-90">
                                 Our licensed RCIC consultants are here to help you navigate the process
                             </p>
-                            <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90">
+                            <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 transition-all duration-300 hover:scale-105">
                                 <Link href="/contact">
                                     Book Free Consultation
+                                    <ArrowRight className="ml-2 h-5 w-5" />
                                 </Link>
                             </Button>
                         </CardContent>

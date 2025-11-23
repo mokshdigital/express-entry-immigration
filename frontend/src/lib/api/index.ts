@@ -17,6 +17,9 @@ export {
     getServiceBySlug,
     getServicesByCategory,
     getServiceCategories,
+    getServiceCategoryBySlug,
+    getServiceCategory,
+    getServicesGroupedByCategory,
 } from './services';
 
 // Testimonials
@@ -47,6 +50,11 @@ export {
     getSEOSettings,
     getSiteSettings,
 } from './settings';
+
+// Pages
+export {
+    getPageBySlug,
+} from './pages';
 
 // Configuration
 export {

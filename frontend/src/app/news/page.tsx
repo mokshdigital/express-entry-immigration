@@ -20,14 +20,16 @@ export default async function NewsPage() {
     return (
         <main>
             {/* Hero Section */}
-            <section className="bg-brand-navy text-white py-16 md:py-20">
+            <section className="bg-gradient-to-r from-brand-navy to-brand-navy/80 text-white py-20 md:py-32">
                 <div className="container">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                        Latest News & Updates
-                    </h1>
-                    <p className="text-xl opacity-90 max-w-2xl">
-                        Stay informed about Canadian immigration changes, policy updates, and expert insights
-                    </p>
+                    <div className="max-w-4xl">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                            Latest News & Updates
+                        </h1>
+                        <p className="text-xl text-blue-100 max-w-3xl">
+                            Stay informed about Canadian immigration changes, policy updates, and expert insights
+                        </p>
+                    </div>
                 </div>
             </section>
 

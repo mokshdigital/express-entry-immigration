@@ -35,6 +35,8 @@ export async function fetchAPI<T>(
             throw error;
         }
 
+        console.error('[API Debug] Fetch error:', error);
+
         throw new WordPressAPIError(
             'Failed to fetch data from WordPress',
             500

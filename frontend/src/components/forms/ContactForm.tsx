@@ -8,18 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ServiceCategory } from '@/types/wordpress';
 
-const serviceOptions = [
-    { value: 'study', label: 'Study Permits' },
-    { value: 'work', label: 'Work Permits' },
-    { value: 'pr', label: 'Permanent Residency' },
-    { value: 'visitor', label: 'Visitor Visas' },
-    { value: 'citizenship', label: 'Citizenship & PR Card' },
-    { value: 'other', label: 'Other Services' },
-];
+interface ContactFormProps {
+    categories: ServiceCategory[];
+}
 
-export function ContactForm() {
+export function ContactForm({ categories }: ContactFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<{
         type: 'success' | 'error' | null;
@@ -31,21 +26,17 @@ export function ContactForm() {
         handleSubmit,
         formState: { errors },
         reset,
-        setValue,
-        watch,
     } = useForm<ContactFormData>({
         resolver: zodResolver(contactFormSchema),
         defaultValues: {
             name: '',
             email: '',
             phone: '',
-            serviceType: 'study',
+            serviceType: 'general',
             message: '',
             agreeToTerms: false,
         },
     });
-
-    const serviceType = watch('serviceType');
 
     const onSubmit = async (data: ContactFormData) => {
         setIsSubmitting(true);
@@ -147,12 +138,13 @@ export function ContactForm() {
                     id="serviceType"
                     {...register('serviceType')}
                     className={`w-full px-3 py-2 border rounded-md text-sm ${errors.serviceType ? 'border-red-500' : 'border-gray-300'
-                        } disabled:opacity-50`}
+                        } disabled:opacity-50 bg-white`}
                     disabled={isSubmitting}
                 >
-                    {serviceOptions.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
+                    <option value="general">General Inquiry</option>
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.slug}>
+                            {category.name}
                         </option>
                     ))}
                 </select>
@@ -178,27 +170,33 @@ export function ContactForm() {
             </div>
 
             {/* Terms Checkbox */}
-            <div className="flex items-start space-x-2">
-                <input
-                    id="terms"
-                    type="checkbox"
-                    {...register('agreeToTerms')}
-                    className="mt-1"
-                    disabled={isSubmitting}
-                />
-                <label htmlFor="terms" className="text-sm text-gray-700">
-                    I agree to the privacy policy and consent to be contacted about my inquiry *
-                </label>
+            <div className="space-y-2">
+                <div className="flex items-start space-x-2">
+                    <input
+                        id="agreeToTerms"
+                        type="checkbox"
+                        {...register('agreeToTerms')}
+                        className={`mt-1 ${errors.agreeToTerms ? 'border-red-500' : ''}`}
+                        disabled={isSubmitting}
+                    />
+                    <Label htmlFor="agreeToTerms" className="text-sm font-normal cursor-pointer">
+                        I agree to the{' '}
+                        <a href="/privacy-policy" className="text-brand-red hover:underline">
+                            Privacy Policy
+                        </a>{' '}
+                        and consent to being contacted about my inquiry *
+                    </Label>
+                </div>
+                {errors.agreeToTerms && (
+                    <p className="text-sm text-red-600">{errors.agreeToTerms.message}</p>
+                )}
             </div>
-            {errors.agreeToTerms && (
-                <p className="text-sm text-red-600">{errors.agreeToTerms.message}</p>
-            )}
 
             {/* Submit Button */}
             <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-brand-navy hover:bg-brand-navy/90 text-white py-3 rounded-lg font-semibold"
+                className="w-full bg-brand-red hover:bg-brand-red/90 text-white py-3 rounded-lg font-semibold"
             >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>

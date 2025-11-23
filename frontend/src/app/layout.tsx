@@ -6,6 +6,8 @@ import { Footer } from "@/components/layout/Footer";
 import { getSiteSettings, getSEOSettings } from "@/lib/api";
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { GoogleTagManager } from '@/components/analytics/GoogleTagManager';
+import { ConsentProvider } from '@/lib/context/ConsentContext';
+import { CookieConsent } from '@/components/ui/CookieConsent';
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -61,26 +63,34 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const seoSettings = await getSEOSettings();
+  const [seoSettings, siteSettings] = await Promise.all([
+    getSEOSettings(),
+    getSiteSettings(),
+  ]);
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${montserrat.variable} ${openSans.variable} font-sans`}>
       <head>
-        {/* Existing head content */}
-      </head>
-      <body className={`${montserrat.variable} ${openSans.variable} font-sans antialiased`}>
-        {/* Analytics Scripts */}
+        {/* Google Analytics */}
         {seoSettings.google_analytics_id && (
-          <GoogleAnalytics measurementId={seoSettings.google_analytics_id} />
+          <ConsentProvider>
+            <GoogleAnalytics measurementId={seoSettings.google_analytics_id} />
+          </ConsentProvider>
         )}
+        {/* Google Tag Manager */}
         {seoSettings.google_tag_manager_id && (
-          <GoogleTagManager gtmId={seoSettings.google_tag_manager_id} />
+          <ConsentProvider>
+            <GoogleTagManager gtmId={seoSettings.google_tag_manager_id} />
+          </ConsentProvider>
         )}
-
-        {/* Main content */}
-        <Header />
-        {children}
-        <Footer />
+      </head>
+      <body className="antialiased min-h-screen flex flex-col">
+        <ConsentProvider>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <CookieConsent settings={siteSettings} />
+        </ConsentProvider>
       </body>
     </html>
   );

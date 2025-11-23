@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { getFAQs, getFAQCategories } from '@/lib/api';
 import { FAQsClient } from '@/components/sections/FAQsClient';
+import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'Frequently Asked Questions | Express Entry Immigration Services',
@@ -21,13 +22,13 @@ export default async function FAQsPage() {
     return (
         <main>
             {/* Hero Section */}
-            <section className="bg-brand-navy text-white py-16 md:py-20">
+            <section className="bg-gradient-to-r from-brand-navy to-brand-navy/80 text-white py-20 md:py-32">
                 <div className="container">
-                    <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                    <div className="max-w-4xl">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6">
                             Frequently Asked Questions
                         </h1>
-                        <p className="text-xl opacity-90">
+                        <p className="text-xl text-blue-100 max-w-3xl">
                             Find answers to common questions about Canadian immigration processes
                         </p>
                     </div>
@@ -50,9 +51,10 @@ export default async function FAQsPage() {
                     <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
                         Book a free consultation to get personalized answers for your situation
                     </p>
-                    <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90">
+                    <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 transition-all duration-300 hover:scale-105">
                         <Link href="/contact">
                             Book Free Consultation
+                            <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
                     </Button>
                 </div>

@@ -13,16 +13,9 @@ export const contactFormSchema = z.object({
         .optional()
         .or(z.literal('')),
 
-    serviceType: z.enum([
-        'study',
-        'work',
-        'pr',
-        'visitor',
-        'citizenship',
-        'other'
-    ], {
-        message: 'Please select a service type'
-    }),
+    serviceType: z.string()
+        .min(1, 'Please select a service type')
+        .default('general'),
 
     message: z.string()
         .min(10, 'Message must be at least 10 characters')

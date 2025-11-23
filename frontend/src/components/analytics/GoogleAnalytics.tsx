@@ -1,14 +1,18 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useConsent } from '@/lib/context/ConsentContext';
 
 interface GoogleAnalyticsProps {
     measurementId: string;
 }
 
 export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
+    const { consent } = useConsent();
+
     useEffect(() => {
-        if (!measurementId) return;
+        // Only load if consent is given
+        if (!consent || !measurementId) return;
 
         // Load Google Analytics script
         const script = document.createElement('script');
@@ -29,7 +33,7 @@ export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
 
         // Make gtag globally available
         (window as any).gtag = gtag;
-    }, [measurementId]);
+    }, [measurementId, consent]);
 
     return null;
 }

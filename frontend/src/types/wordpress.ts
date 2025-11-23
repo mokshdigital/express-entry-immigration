@@ -24,13 +24,44 @@ export interface WordPressPost {
     };
 }
 
-export interface Service extends WordPressPost {
+export interface ServiceCategory {
+    id: number;
+    count: number;
+    description: string;
+    link: string;
+    name: string;
+    slug: string;
+    taxonomy: string;
+    parent: number;
     acf: {
-        service_category: string;
-        service_icon: string;
+        service_category_icon: {
+            type: string;
+            value: string;
+        };
+        sc_display_order: number;
+    };
+}
+
+export interface Service extends WordPressPost {
+    service_category: number[];
+    featured_image_url?: string;
+    acf: {
+        service_child_of: number;
         requirements: string;
-        process_description: string;
+        application_process_description: string;
+        application_process_steps?: Array<{
+            step_title: string;
+            step_description: string;
+            estimated_duration?: string;
+        }>;
         processing_time: string;
+    };
+    _embedded?: {
+        'wp:featuredmedia'?: Array<{
+            source_url: string;
+            alt_text: string;
+        }>;
+        'wp:term'?: Array<Array<ServiceCategory>>;
     };
 }
 
@@ -103,4 +134,14 @@ export interface SiteSettings {
     site_name: string;
     site_logo_url: string;
     favicon_url: string;
+    privacy_policy_url?: string;
+    terms_of_service_url?: string;
+    cookie_message?: string;
+    cookie_accept_text?: string;
+    cookie_decline_text?: string;
+}
+
+export interface WordPressPage extends WordPressPost {
+    parent: number;
+    menu_order: number;
 }

@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
 import Hero from '@/components/sections/Hero';
-import ServicesGrid from '@/components/sections/ServicesGrid';
+import ServiceCategoriesGrid from '@/components/sections/ServiceCategoriesGrid';
 import { StatsSection } from '@/components/sections/StatsSection';
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel';
 import FAQsPreview from '@/components/sections/FAQsPreview';
+import { CTASection } from '@/components/sections/CTASection';
 import {
     getHeroSettings,
-    getServices,
+    getServiceCategories,
     getStats,
     getTestimonials,
     getFAQs,
@@ -20,35 +21,22 @@ export const metadata: Metadata = {
 export default async function HomePage() {
     try {
         // Fetch all data in parallel
-        const [heroSettings, services, stats, testimonials, faqs] = await Promise.all([
+        const [heroSettings, categories, stats, testimonials, faqs] = await Promise.all([
             getHeroSettings(),
-            getServices(),
+            getServiceCategories(),
             getStats(),
             getTestimonials(),
             getFAQs(),
         ]);
 
-        // DEBUG: Log data to see what we're getting
-        console.log('=== HOME PAGE DATA ===');
-        console.log('Hero Settings:', heroSettings);
-        console.log('Services count:', services?.length);
-        console.log('Stats count:', stats?.length);
-        console.log('Stats data:', stats);
-        console.log('Testimonials count:', testimonials?.length);
-        console.log('FAQs count:', faqs?.length);
-        console.log('First stat detail:', JSON.stringify(stats[0], null, 2));
-        console.log('Testimonials detail:', JSON.stringify(testimonials[0], null, 2));
-
-
-
-
         return (
             <main>
                 <Hero settings={heroSettings} />
-                <ServicesGrid services={services} />
-                <StatsSection stats={stats} />
-                <TestimonialsCarousel testimonials={testimonials} />
-                <FAQsPreview faqs={faqs} />
+                {categories && categories.length > 0 && <ServiceCategoriesGrid categories={categories} />}
+                {stats && stats.length > 0 && <StatsSection stats={stats} />}
+                {testimonials && testimonials.length > 0 && <TestimonialsCarousel testimonials={testimonials} />}
+                {faqs && faqs.length > 0 && <FAQsPreview faqs={faqs} />}
+                <CTASection />
             </main>
         );
     } catch (error) {

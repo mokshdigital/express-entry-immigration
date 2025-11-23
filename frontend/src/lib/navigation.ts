@@ -2,32 +2,25 @@
  * Navigation menu structure for Express Entry Immigration
  * This defines the complete site navigation including mega menu items
  */
-import { Service } from '@/types/wordpress';
+
+import { CategoryWithServices } from '@/lib/api/services';
 
 export interface NavItem {
     label: string;
     href: string;
     children?: NavItem[];
     description?: string;
+    icon?: string;
 }
 
 // Base navigation structure (without dynamic services)
 export const baseNavigation: NavItem[] = [
     {
-        label: 'Home',
-        href: '/',
-    },
-    {
         label: 'About',
         href: '/about',
     },
     {
-        label: 'Services',
-        href: '/services',
-        children: [], // Will be populated dynamically
-    },
-    {
-        label: 'News',
+        label: 'Latest Updates',
         href: '/news',
     },
     {
@@ -40,71 +33,30 @@ export const baseNavigation: NavItem[] = [
     },
 ];
 
-// Helper to build the full navigation menu with dynamic services
-export function buildNavigation(services: Service[]): NavItem[] {
-    // Group services by category
-    const servicesByCategory: Record<string, Service[]> = {};
-
-    services.forEach(service => {
-        const category = service.acf?.service_category || 'other';
-        if (!servicesByCategory[category]) {
-            servicesByCategory[category] = [];
-        }
-        servicesByCategory[category].push(service);
-    });
-
-    // Define category labels/order
-    const categoryLabels: Record<string, string> = {
-        study: 'Study',
-        work: 'Work',
-        pr: 'Permanent Residency',
-        visitor: 'Visitor Visas',
-        citizenship: 'Citizenship & PR Card',
-        other: 'Other Services'
+/**
+ * Build complete navigation with dynamic service categories
+ */
+export function buildNavigation(categories: CategoryWithServices[]): NavItem[] {
+    const servicesItem: NavItem = {
+        label: 'Services',
+        href: '/#services',
+        children: categories.map((category) => ({
+            label: category.name,
+            href: `/services/${category.slug}`,
+            icon: category.acf.service_category_icon.value,
+            children: category.services.map((service) => ({
+                label: service.title.rendered,
+                href: `/services/${category.slug}/${service.slug}`,
+            })),
+        })),
     };
 
-    // Desired order of categories
-    const categoryOrder = ['study', 'work', 'pr', 'visitor', 'citizenship', 'other'];
-
-    // Build services menu items
-    const serviceItems: NavItem[] = categoryOrder
-        .filter(category => servicesByCategory[category] && servicesByCategory[category].length > 0)
-        .map(category => {
-            const categoryServices = servicesByCategory[category];
-            const label = categoryLabels[category] || category;
-            const href = `/services/${category}`;
-
-            // Sort services by date (oldest to newest)
-            const sortedServices = [...categoryServices].sort((a, b) => {
-                return new Date(a.date).getTime() - new Date(b.date).getTime();
-            });
-
-            return {
-                label,
-                href,
-                children: sortedServices.map(service => ({
-                    label: service.title.rendered,
-                    href: `/services/${category}`, // Link to category page as requested
-                }))
-            };
-        });
-
-    // Return new navigation array with populated services
-    return baseNavigation.map(item => {
-        if (item.label === 'Services') {
-            return {
-                ...item,
-                children: serviceItems
-            };
-        }
-        return item;
-    });
-}
-
-// Helper function to get all service categories from the built menu
-export function getServiceCategories(menu: NavItem[]): NavItem[] {
-    const servicesItem = menu.find(item => item.label === 'Services');
-    return servicesItem?.children || [];
+    // Insert Services after About
+    return [
+        baseNavigation[0], // About
+        servicesItem,      // Services (with categories)
+        ...baseNavigation.slice(1), // Latest Updates, FAQs, Contact
+    ];
 }
 
 // Helper function to flatten menu for mobile

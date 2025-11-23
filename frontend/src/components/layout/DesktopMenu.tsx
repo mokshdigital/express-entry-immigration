@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { type NavItem } from '@/lib/navigation';
+import { getDashicon } from '@/lib/utils/iconMapper';
 
 interface DesktopMenuProps {
     menu: NavItem[];
@@ -55,37 +56,44 @@ export function DesktopMenu({ menu }: DesktopMenuProps) {
                         </button>
 
                         {isOpen && (
-                            <div className="absolute left-0 top-full pt-2 z-50">
-                                <div className="bg-white rounded-lg shadow-xl border border-gray-200 p-6 min-w-[800px] grid grid-cols-3 gap-6">
-                                    {item.children?.map((category) => (
-                                        <div key={category.label}>
-                                            <Link
-                                                href={category.href}
-                                                className="block font-semibold text-brand-navy hover:text-brand-red mb-2"
-                                            >
-                                                {category.label}
-                                            </Link>
-                                            {category.description && (
-                                                <p className="text-xs text-gray-500 mb-3">
-                                                    {category.description}
-                                                </p>
-                                            )}
-                                            {category.children && (
-                                                <ul className="space-y-2">
-                                                    {category.children.map((subItem) => (
-                                                        <li key={subItem.label}>
-                                                            <Link
-                                                                href={subItem.href}
-                                                                className="text-sm text-gray-600 hover:text-brand-navy transition-colors"
-                                                            >
-                                                                {subItem.label}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </div>
-                                    ))}
+                            <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50 w-screen max-w-5xl px-4">
+                                <div className="bg-white rounded-xl shadow-2xl border border-gray-100 p-5 grid grid-cols-3 gap-5">
+                                    {item.children?.map((category) => {
+                                        const Icon = category.icon ? getDashicon(category.icon) : null;
+
+                                        return (
+                                            <div key={category.label} className="space-y-3">
+                                                <Link
+                                                    href={category.href}
+                                                    className="flex items-center gap-3 group"
+                                                >
+                                                    {Icon && (
+                                                        <div className="w-8 h-8 rounded-lg bg-brand-red/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-red/20 transition-colors">
+                                                            <Icon className="w-4 h-4 text-brand-red" />
+                                                        </div>
+                                                    )}
+                                                    <span className="font-bold text-base text-brand-navy group-hover:text-brand-red transition-colors">
+                                                        {category.label}
+                                                    </span>
+                                                </Link>
+
+                                                {category.children && category.children.length > 0 && (
+                                                    <ul className="space-y-1 pl-[44px]">
+                                                        {category.children.map((service) => (
+                                                            <li key={service.label}>
+                                                                <Link
+                                                                    href={service.href}
+                                                                    className="text-sm text-gray-600 hover:text-brand-red hover:underline transition-colors block py-0.5"
+                                                                >
+                                                                    {service.label}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}

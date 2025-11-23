@@ -49,7 +49,7 @@ export function FAQsClient({ faqs, categories }: FAQsClientProps) {
                         <AccordionItem
                             key={faq.id}
                             value={faq.id.toString()}
-                            className="border rounded-lg px-6 bg-white"
+                            className="border rounded-lg px-6 bg-white last:border-b"
                         >
                             <AccordionTrigger className="text-left font-semibold hover:no-underline py-6">
                                 {faq.acf?.question}

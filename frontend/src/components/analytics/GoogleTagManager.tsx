@@ -1,14 +1,18 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useConsent } from '@/lib/context/ConsentContext';
 
 interface GoogleTagManagerProps {
     gtmId: string;
 }
 
 export function GoogleTagManager({ gtmId }: GoogleTagManagerProps) {
+    const { consent } = useConsent();
+
     useEffect(() => {
-        if (!gtmId) return;
+        // Only load if consent is given
+        if (!consent || !gtmId) return;
 
         // GTM script
         const script = document.createElement('script');
@@ -21,7 +25,7 @@ export function GoogleTagManager({ gtmId }: GoogleTagManagerProps) {
       })(window,document,'script','dataLayer','${gtmId}');
     `;
         document.head.appendChild(script);
-    }, [gtmId]);
+    }, [gtmId, consent]);
 
     return null;
 }

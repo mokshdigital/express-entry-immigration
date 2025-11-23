@@ -35,7 +35,7 @@ export default function FAQsPreview({ faqs }: FAQsPreviewProps) {
                         <AccordionItem
                             key={faq.id}
                             value={faq.id.toString()}
-                            className="border rounded-lg px-6"
+                            className="border rounded-lg px-6 last:border-b"
                         >
                             <AccordionTrigger className="text-left font-semibold hover:no-underline">
                                 {faq.acf?.question || faq.title.rendered}

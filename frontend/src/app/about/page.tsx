@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'About Us | Express Entry Immigration Services',
@@ -36,13 +36,13 @@ export default function AboutPage() {
     return (
         <main>
             {/* Hero Section */}
-            <section className="bg-brand-navy text-white py-16 md:py-24">
+            <section className="bg-gradient-to-r from-brand-navy to-brand-navy/80 text-white py-20 md:py-32">
                 <div className="container">
-                    <div className="max-w-3xl mx-auto text-center">
+                    <div className="max-w-4xl">
                         <h1 className="text-4xl md:text-5xl font-bold mb-6">
                             About Express Entry Immigration Services
                         </h1>
-                        <p className="text-xl leading-relaxed opacity-90">
+                        <p className="text-xl text-blue-100 max-w-3xl">
                             Your trusted partner in navigating Canadian immigration. We're licensed, experienced,
                             and committed to making your immigration journey as smooth as possible.
                         </p>
@@ -192,9 +192,10 @@ export default function AboutPage() {
                         Book a free consultation today and let's discuss how we can help you achieve your
                         immigration goals.
                     </p>
-                    <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90">
+                    <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 transition-all duration-300 hover:scale-105">
                         <Link href="/contact">
                             Book Free Consultation
+                            <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
                     </Button>
                 </div>

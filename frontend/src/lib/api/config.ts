@@ -14,6 +14,7 @@ export const ENDPOINTS = {
     posts: `${WP_API_URL}/posts`,
     pages: `${WP_API_URL}/pages`,
     services: `${WP_API_URL}/services`,
+    service_category: `${WP_API_URL}/service_category`,
     testimonials: `${WP_API_URL}/testimonials`,
     faqs: `${WP_API_URL}/faqs`,
     stats: `${WP_API_URL}/stats`,
