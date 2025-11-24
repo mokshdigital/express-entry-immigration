@@ -4,7 +4,7 @@ interface ContactNotificationProps {
     name: string;
     email: string;
     phone?: string;
-    serviceType: string;
+    serviceType?: string;
     message: string;
 }
 
@@ -12,7 +12,7 @@ export function ContactNotificationEmail({
     name,
     email,
     phone,
-    serviceType,
+    serviceType = 'general',
     message,
 }: ContactNotificationProps) {
     return (

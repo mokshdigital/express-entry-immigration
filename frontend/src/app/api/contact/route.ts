@@ -20,7 +20,7 @@ export async function POST(request: Request) {
                 name: validatedData.name,
                 email: validatedData.email,
                 phone: validatedData.phone,
-                serviceType: validatedData.serviceType,
+                serviceType: validatedData.serviceType || 'general',
                 message: validatedData.message,
             }),
         });
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
             html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #003366;">Thank You, ${validatedData.name}!</h2>
-          <p>We have received your inquiry about our ${validatedData.serviceType} services.</p>
+          <p>We have received your inquiry about our ${validatedData.serviceType || 'general'} services.</p>
           <p>Our immigration consultants will review your submission and contact you shortly.</p>
           <p style="color: #666; font-size: 12px; margin-top: 20px;">
             Express Entry Immigration Services<br>

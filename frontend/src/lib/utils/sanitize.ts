@@ -8,7 +8,7 @@ import { JSDOM } from 'jsdom';
 export function sanitizeHTML(dirty: string): string {
     // Create a JSDOM instance for server-side rendering
     const window = new JSDOM('').window;
-    const purify = DOMPurify(window as unknown as Window);
+    const purify = DOMPurify(window as any);
 
     // Configure DOMPurify to allow safe HTML tags
     const config = {
