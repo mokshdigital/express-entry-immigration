@@ -15,7 +15,7 @@ export const contactFormSchema = z.object({
 
     serviceType: z.string()
         .min(1, 'Please select a service type')
-        .default('general'),
+        .optional(),
 
     message: z.string()
         .min(10, 'Message must be at least 10 characters')
