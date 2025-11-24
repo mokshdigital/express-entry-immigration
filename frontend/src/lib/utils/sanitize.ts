@@ -1,15 +1,11 @@
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
+import DOMPurify from 'isomorphic-dompurify';
 
 /**
  * Sanitize HTML content to prevent XSS attacks
  * This is used for WordPress content that may contain HTML
+ * Using isomorphic-dompurify which works in both browser and Node.js
  */
 export function sanitizeHTML(dirty: string): string {
-    // Create a JSDOM instance for server-side rendering
-    const window = new JSDOM('').window;
-    const purify = DOMPurify(window as any);
-
     // Configure DOMPurify to allow safe HTML tags
     const config = {
         ALLOWED_TAGS: [
@@ -23,5 +19,5 @@ export function sanitizeHTML(dirty: string): string {
         ALLOW_DATA_ATTR: false,
     };
 
-    return purify.sanitize(dirty, config);
+    return DOMPurify.sanitize(dirty, config);
 }
