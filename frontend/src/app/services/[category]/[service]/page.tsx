@@ -48,15 +48,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
     }
 
     // Sanitize content
-    const sanitizedContent = sanitizeHTML(service.content.rendered);
-    const sanitizedRequirements = service.acf.requirements
-        ? sanitizeHTML(service.acf.requirements)
+    // Sanitize content
+    const sanitizedContent = sanitizeHTML(service.content?.rendered || '');
+
+    // Safely access ACF fields with optional chaining
+    const requirements = service.acf?.requirements || '';
+    const sanitizedRequirements = requirements
+        ? sanitizeHTML(requirements)
         : '<p>Requirements information coming soon.</p>';
-    const sanitizedProcess = service.acf.application_process_description
-        ? sanitizeHTML(service.acf.application_process_description)
+
+    const process = service.acf?.application_process_description || '';
+    const sanitizedProcess = process
+        ? sanitizeHTML(process)
         : '<p>Process information coming soon.</p>';
 
-    const processingTime = service.acf.processing_time || 'Varies';
+    const processingTime = service.acf?.processing_time || 'Varies';
+    const applicationSteps = service.acf?.application_process_steps || [];
     const featuredImage = service.featured_image_url || '/images/placeholder-service.jpg';
 
     return (
@@ -89,11 +96,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
                             />
 
                             {/* Timeline */}
-                            {service.acf.application_process_steps && service.acf.application_process_steps.length > 0 && (
+                            {applicationSteps.length > 0 && (
                                 <div className="bg-gray-50 rounded-2xl border border-gray-200 p-8">
                                     <h2 className="text-2xl font-bold text-brand-navy mb-6">Application Timeline</h2>
                                     <div className="space-y-6">
-                                        {service.acf.application_process_steps.map((step, index) => (
+                                        {applicationSteps.map((step, index) => (
                                             <div key={index} className="flex gap-4">
                                                 <div className="flex-shrink-0">
                                                     <div className="w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center font-bold">
