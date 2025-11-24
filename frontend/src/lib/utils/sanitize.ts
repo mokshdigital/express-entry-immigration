@@ -1,23 +1,22 @@
-import DOMPurify from 'isomorphic-dompurify';
+import sanitizeHtml from 'sanitize-html';
 
 /**
  * Sanitize HTML content to prevent XSS attacks
  * This is used for WordPress content that may contain HTML
- * Using isomorphic-dompurify which works in both browser and Node.js
+ * Using sanitize-html which is a pure string-based sanitizer (no jsdom required)
  */
 export function sanitizeHTML(dirty: string): string {
-    // Configure DOMPurify to allow safe HTML tags
-    const config = {
-        ALLOWED_TAGS: [
+    return sanitizeHtml(dirty, {
+        allowedTags: [
             'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
             'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'code', 'pre',
             'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'
         ],
-        ALLOWED_ATTR: [
-            'href', 'src', 'alt', 'title', 'class', 'id', 'target', 'rel'
-        ],
-        ALLOW_DATA_ATTR: false,
-    };
-
-    return DOMPurify.sanitize(dirty, config);
+        allowedAttributes: {
+            'a': ['href', 'target', 'rel', 'title', 'class', 'id'],
+            'img': ['src', 'alt', 'title', 'class', 'id'],
+            '*': ['class', 'id']
+        },
+        allowedSchemes: ['http', 'https', 'mailto', 'tel'],
+    });
 }
