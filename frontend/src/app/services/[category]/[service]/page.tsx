@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         ? sanitizeHTML(requirements)
         : '<p>Requirements information coming soon.</p>';
 
-    const process = service.acf?.application_process_description || '';
+    const process = service.acf?.process_description || '';
     const sanitizedProcess = process
         ? sanitizeHTML(process)
         : '<p>Process information coming soon.</p>';

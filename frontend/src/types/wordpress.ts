@@ -48,7 +48,7 @@ export interface Service extends WordPressPost {
     acf: {
         service_child_of: number;
         requirements: string;
-        application_process_description: string;
+        process_description: string;
         application_process_steps?: Array<{
             step_title: string;
             step_description: string;
