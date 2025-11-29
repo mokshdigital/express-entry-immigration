@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ChevronLeft, Clock, Calendar } from 'lucide-react';
 import { getServiceBySlug, getServiceCategoryBySlug } from '@/lib/api';
 import { sanitizeHTML } from '@/lib/utils/sanitize';
+import { decodeHTML } from '@/lib/utils/decode';
 import { ServiceTabs } from '@/components/ui/ServiceTabs';
 import { ServiceSidebar } from '@/components/sections/ServiceSidebar';
 
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
         : '';
 
     return {
-        title: `${service.title.rendered} - Express Entry Immigration Services`,
-        description: plainTextExcerpt || `Learn about our ${service.title.rendered.toLowerCase()} immigration services`,
+        title: `${decodeHTML(service.title.rendered)} - Express Entry Immigration Services`,
+        description: plainTextExcerpt || `Learn about our ${decodeHTML(service.title.rendered).toLowerCase()} immigration services`,
     };
 }
 
@@ -74,7 +75,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     {/* Service Header */}
                     <div className="max-w-4xl mx-auto text-center">
                         <h1 className="text-4xl md:text-5xl font-bold">
-                            {service.title.rendered}
+                            {decodeHTML(service.title.rendered)}
                         </h1>
                     </div>
                 </div>

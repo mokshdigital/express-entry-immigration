@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import type { FAQ } from '@/types/wordpress';
+import { decodeHTML } from '@/lib/utils/decode';
 
 interface FAQsPreviewProps {
     faqs: FAQ[];
@@ -38,7 +39,7 @@ export default function FAQsPreview({ faqs }: FAQsPreviewProps) {
                             className="border rounded-lg px-6 last:border-b"
                         >
                             <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                                {faq.acf?.question || faq.title.rendered}
+                                {faq.acf?.question || decodeHTML(faq.title.rendered)}
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Clock, ArrowRight } from 'lucide-react';
 import { Service } from '@/types/wordpress';
+import { decodeHTML } from '@/lib/utils/decode';
 
 interface ServiceCardProps {
     service: Service;
@@ -14,7 +15,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service, categorySlug, index = 0 }: ServiceCardProps) {
     const featuredImage = service._embedded?.['wp:featuredmedia']?.[0]?.source_url;
-    const imageAlt = service._embedded?.['wp:featuredmedia']?.[0]?.alt_text || service.title.rendered;
+    const imageAlt = service._embedded?.['wp:featuredmedia']?.[0]?.alt_text || decodeHTML(service.title.rendered);
 
     return (
         <motion.div
@@ -41,7 +42,7 @@ export function ServiceCard({ service, categorySlug, index = 0 }: ServiceCardPro
                     {/* Content */}
                     <div className="p-6">
                         <h3 className="text-xl font-bold text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">
-                            {service.title.rendered}
+                            {decodeHTML(service.title.rendered)}
                         </h3>
 
                         {service.excerpt?.rendered && (

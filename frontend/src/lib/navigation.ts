@@ -4,6 +4,7 @@
  */
 
 import { CategoryWithServices } from '@/lib/api/services';
+import { decodeHTML } from './utils/decode';
 
 export interface NavItem {
     label: string;
@@ -45,7 +46,7 @@ export function buildNavigation(categories: CategoryWithServices[]): NavItem[] {
             href: `/services/${category.slug}`,
             icon: category.acf.service_category_icon.value,
             children: category.services.map((service) => ({
-                label: service.title.rendered,
+                label: decodeHTML(service.title.rendered),
                 href: `/services/${category.slug}/${service.slug}`,
             })),
         })),

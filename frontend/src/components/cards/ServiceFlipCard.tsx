@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Clock, ArrowRight } from 'lucide-react';
 import { Service } from '@/types/wordpress';
+import { decodeHTML } from '@/lib/utils/decode';
 
 interface ServiceFlipCardProps {
     service: Service;
@@ -15,7 +16,7 @@ interface ServiceFlipCardProps {
 
 export function ServiceFlipCard({ service, categorySlug, index = 0 }: ServiceFlipCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
-    const title = service.title.rendered;
+    const title = decodeHTML(service.title.rendered);
     // Extract plain text and limit to 100 chars
     const plainExcerpt = service.excerpt?.rendered
         ? service.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 100) + '...'

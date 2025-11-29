@@ -86,6 +86,110 @@ export default function AboutPage() {
                 </div>
             </section>
 
+            {/* RCIC Profile Section */}
+            <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+                <div className="container">
+                    <div className="max-w-5xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+                                Meet Our Lead Consultant
+                            </h2>
+                            <p className="text-lg text-gray-600">
+                                Licensed RCIC with proven expertise in Canadian immigration
+                            </p>
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                            <div className="grid md:grid-cols-5 gap-0">
+                                {/* Profile Image */}
+                                <div className="md:col-span-2 relative h-64 md:h-auto bg-gradient-to-br from-brand-navy to-brand-navy/80">
+                                    <div className="absolute inset-0 flex items-center justify-center p-8">
+                                        <div className="text-center text-white">
+                                            <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20">
+                                                <span className="text-5xl font-bold">AM</span>
+                                            </div>
+                                            <h3 className="text-2xl font-bold mb-1">Ashish Manral</h3>
+                                            <p className="text-blue-200 font-medium">RCIC, R#</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Profile Content */}
+                                <div className="md:col-span-3 p-8 md:p-10">
+                                    <div className="space-y-6">
+                                        <div>
+                                            <h4 className="text-xl font-bold text-brand-navy mb-3 flex items-center gap-2">
+                                                <CheckCircle2 className="w-5 h-5 text-brand-red" />
+                                                Professional Credentials
+                                            </h4>
+                                            <p className="text-gray-700 leading-relaxed">
+                                                Ashish Manral is a Licensed Regulated Canadian Immigration Consultant (RCIC)
+                                                registered with the College of Immigration and Citizenship Consultants (CICC).
+                                                With extensive knowledge of Canadian immigration law and procedures, he is
+                                                authorized to represent clients before Immigration, Refugees and Citizenship
+                                                Canada (IRCC).
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <h4 className="text-xl font-bold text-brand-navy mb-3 flex items-center gap-2">
+                                                <CheckCircle2 className="w-5 h-5 text-brand-red" />
+                                                Areas of Expertise
+                                            </h4>
+                                            <ul className="space-y-2 text-gray-700">
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-brand-red mt-1">•</span>
+                                                    <span>Express Entry & Provincial Nominee Programs (PNP)</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-brand-red mt-1">•</span>
+                                                    <span>Study Permits & Post-Graduation Work Permits</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-brand-red mt-1">•</span>
+                                                    <span>Work Permits & LMIA Applications</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-brand-red mt-1">•</span>
+                                                    <span>Family Sponsorship & Visitor Visas</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-brand-red mt-1">•</span>
+                                                    <span>Permanent Residence & Citizenship Applications</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <h4 className="text-xl font-bold text-brand-navy mb-3 flex items-center gap-2">
+                                                <CheckCircle2 className="w-5 h-5 text-brand-red" />
+                                                Commitment to Excellence
+                                            </h4>
+                                            <p className="text-gray-700 leading-relaxed">
+                                                Ashish is dedicated to providing personalized, ethical, and results-driven
+                                                immigration services. He stays current with the latest immigration policies
+                                                and procedures to ensure clients receive accurate, up-to-date advice tailored
+                                                to their unique circumstances.
+                                            </p>
+                                        </div>
+
+                                        <div className="pt-4 border-t border-gray-200">
+                                            <Button asChild variant="outline" className="w-full md:w-auto">
+                                                <Link href="/contact">
+                                                    Schedule a Consultation
+                                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                                </Link>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             {/* Values Section */}
             <section className="py-16 md:py-24 bg-gray-50">
                 <div className="container">
