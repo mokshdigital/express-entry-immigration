@@ -126,7 +126,18 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
                         {/* Right Column - 30% */}
                         <div className="lg:col-span-3">
-                            <div className="lg:sticky lg:top-24">
+                            <div className="lg:sticky lg:top-24 space-y-6">
+                                {/* Processing Time Card */}
+                                <div className="bg-white border-2 border-brand-red rounded-2xl p-6">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <Clock className="w-6 h-6 text-brand-red" />
+                                        <h3 className="text-lg font-bold text-brand-navy">Processing Time</h3>
+                                    </div>
+                                    <p className="text-gray-600 text-sm">
+                                        {processingTime}
+                                    </p>
+                                </div>
+
                                 <ServiceSidebar />
                             </div>
                         </div>
