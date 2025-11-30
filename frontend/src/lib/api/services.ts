@@ -114,9 +114,20 @@ export async function getServicesGroupedByCategory(): Promise<CategoryWithServic
         }
     });
 
-    // Combine categories with their services
-    return categories.map(category => ({
-        ...category,
-        services: servicesByCategoryId.get(category.id) || [],
-    }));
+    // Combine categories with their services and sort by creation date
+    return categories.map(category => {
+        const categoryServices = servicesByCategoryId.get(category.id) || [];
+
+        // Sort services by date (oldest to newest)
+        const sortedServices = categoryServices.sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return dateA - dateB; // Ascending order (oldest first)
+        });
+
+        return {
+            ...category,
+            services: sortedServices,
+        };
+    });
 }
