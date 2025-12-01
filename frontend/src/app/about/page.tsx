@@ -76,7 +76,7 @@ export default function AboutPage() {
                         </div>
                         <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                             <Image
-                                src="https://cms.expressentryimmigration.ca/wp-content/uploads/2025/11/Photograph.jpg"
+                                src="https://cms.expressentryimmigration.ca/wp-content/uploads/2025/12/AboutUs-sectionimage.jpg"
                                 alt="Our team"
                                 fill
                                 className="object-cover"
