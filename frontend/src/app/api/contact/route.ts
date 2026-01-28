@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
         // Send email to business
         const businessEmailResult = await resend.emails.send({
-            from: 'Contact Form <onboarding@resend.dev>',
+            from: `Contact Form <${process.env.SENDER_EMAIL || 'onboarding@resend.dev'}>`,
             to: process.env.CONTACT_EMAIL || 'info@expressentryimmigration.ca',
             subject: `New Contact Form Submission from ${validatedData.name}`,
             react: ContactNotificationEmail({
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
         // Send confirmation email to user
         const confirmationEmailResult = await resend.emails.send({
-            from: 'Express Entry Immigration <onboarding@resend.dev>',
+            from: `Express Entry Immigration <${process.env.SENDER_EMAIL || 'onboarding@resend.dev'}>`,
             to: validatedData.email,
             subject: 'We Received Your Message - Express Entry Immigration Services',
             html: `
