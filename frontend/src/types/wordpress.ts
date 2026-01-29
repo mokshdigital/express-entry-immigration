@@ -141,6 +141,29 @@ export interface SiteSettings {
     cookie_decline_text?: string;
 }
 
+export interface AboutSettings {
+    about_hero_headline: string;
+    about_hero_description: string;
+    about_mission_title: string;
+    about_mission_description_1: string;
+    about_mission_description_2: string;
+    about_mission_description_3: string;
+    about_mission_image: string;
+    about_lead_name: string;
+    about_lead_title: string;
+    about_lead_credentials: string;
+    about_lead_expertise: string[];
+    about_lead_commitment: string;
+    about_values: Array<{
+        title: string;
+        description: string;
+    }>;
+    about_why_choose_us: Array<{
+        title: string;
+        description: string;
+    }>;
+}
+
 export interface WordPressPage extends WordPressPost {
     parent: number;
     menu_order: number;

@@ -29,4 +29,5 @@ export const ACF_ENDPOINTS = {
     socialLinks: `${ACF_API_URL}/options/social-links`,
     seoSettings: `${ACF_API_URL}/options/seo-settings`,
     siteSettings: `${ACF_API_URL}/options/site-settings`,
+    aboutSettings: `${ACF_API_URL}/options/about-settings`,
 } as const;

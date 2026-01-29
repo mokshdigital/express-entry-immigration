@@ -49,6 +49,7 @@ export {
     getSocialLinks,
     getSEOSettings,
     getSiteSettings,
+    getAboutSettings,
 } from './settings';
 
 // Pages

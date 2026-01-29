@@ -11,6 +11,7 @@ import {
     SocialLinks,
     SEOSettings,
     SiteSettings,
+    AboutSettings,
 } from '@/types/wordpress';
 
 /**
@@ -53,4 +54,11 @@ export async function getSEOSettings(): Promise<SEOSettings> {
  */
 export async function getSiteSettings(): Promise<SiteSettings> {
     return fetchAPI<SiteSettings>(ACF_ENDPOINTS.siteSettings);
+}
+
+/**
+ * Get About Settings
+ */
+export async function getAboutSettings(): Promise<AboutSettings> {
+    return fetchAPI<AboutSettings>(ACF_ENDPOINTS.aboutSettings);
 }
