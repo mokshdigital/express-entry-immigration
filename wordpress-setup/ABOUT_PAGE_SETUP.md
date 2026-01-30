@@ -41,7 +41,8 @@ Add the following fields EXACTLY as named (the "Field Name" column is what matte
 | **Lead Consultant** | | **Tab** | |
 | Name | `about_lead_name` | Text | e.g. "Ashish Manral" |
 | Image | `about_lead_image` | Image | Return Format: **Image URL** |
-| Title | `about_lead_title` | Text | e.g. "RCIC, R#" |
+| Title | `about_lead_title` | Text | e.g. "Lead Consultant" |
+| RCIC # | `about_lead_rcic_number` | Text | e.g. "RCIC R#123456" |
 | Credentials | `about_lead_credentials` | Text Area | |
 | Expertise | `about_lead_expertise` | Text Area | **Important**: Enter one item per line. |
 | Commitment | `about_lead_commitment` | Text Area | |

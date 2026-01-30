@@ -152,6 +152,7 @@ export interface AboutSettings {
     about_lead_image: string;
     about_lead_name: string;
     about_lead_title: string;
+    about_lead_rcic_number: string;
     about_lead_credentials: string;
     about_lead_expertise: string[];
     about_lead_commitment: string;

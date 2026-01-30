@@ -161,7 +161,12 @@ export default async function AboutPage() {
                                                 </div>
                                             )}
                                             <h3 className="text-2xl font-bold mb-1">{data.about_lead_name}</h3>
-                                            <p className="text-blue-200 font-medium">{data.about_lead_title}</p>
+                                            <p className="text-blue-200 font-medium mb-1">{data.about_lead_title}</p>
+                                            {data.about_lead_rcic_number && (
+                                                <p className="text-sm text-white/80 bg-white/10 px-3 py-1 rounded-full inline-block">
+                                                    {data.about_lead_rcic_number}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
