@@ -40,6 +40,7 @@ Add the following fields EXACTLY as named (the "Field Name" column is what matte
 | Mission Image | `about_mission_image` | Image | Return Format: **Image URL** |
 | **Lead Consultant** | | **Tab** | |
 | Name | `about_lead_name` | Text | e.g. "Ashish Manral" |
+| Image | `about_lead_image` | Image | Return Format: **Image URL** |
 | Title | `about_lead_title` | Text | e.g. "RCIC, R#" |
 | Credentials | `about_lead_credentials` | Text Area | |
 | Expertise | `about_lead_expertise` | Text Area | **Important**: Enter one item per line. |

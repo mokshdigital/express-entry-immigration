@@ -149,6 +149,7 @@ export interface AboutSettings {
     about_mission_description_2: string;
     about_mission_description_3: string;
     about_mission_image: string;
+    about_lead_image: string;
     about_lead_name: string;
     about_lead_title: string;
     about_lead_credentials: string;

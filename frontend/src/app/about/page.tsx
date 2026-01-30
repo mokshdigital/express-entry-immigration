@@ -144,11 +144,22 @@ export default async function AboutPage() {
                                 <div className="md:col-span-2 relative h-64 md:h-auto bg-gradient-to-br from-brand-navy to-brand-navy/80">
                                     <div className="absolute inset-0 flex items-center justify-center p-8">
                                         <div className="text-center text-white">
-                                            <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20">
-                                                <span className="text-5xl font-bold">
-                                                    {data.about_lead_name.split(' ').map(n => n[0]).join('')}
-                                                </span>
-                                            </div>
+                                            {data.about_lead_image ? (
+                                                <div className="w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white/20 relative shadow-lg">
+                                                    <Image
+                                                        src={data.about_lead_image}
+                                                        alt={data.about_lead_name}
+                                                        fill
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20">
+                                                    <span className="text-5xl font-bold">
+                                                        {data.about_lead_name.split(' ').map(n => n[0]).join('')}
+                                                    </span>
+                                                </div>
+                                            )}
                                             <h3 className="text-2xl font-bold mb-1">{data.about_lead_name}</h3>
                                             <p className="text-blue-200 font-medium">{data.about_lead_title}</p>
                                         </div>
