@@ -24,8 +24,8 @@ const fallbackData = {
     about_mission_description_3: 'With hundreds of successful cases and a deep understanding of Canadian immigration programs, we\'ve helped clients from around the world achieve their dreams of making Canada their home.',
     about_mission_image: 'https://cms.expressentryimmigration.ca/wp-content/uploads/2025/12/AboutUs-sectionimage.jpg',
     about_lead_name: 'Ashish Manral',
-    about_lead_title: 'Lead Consultant',
-    about_lead_rcic_number: 'RCIC R#12345678',
+    about_lead_title: '',
+    about_lead_rcic_number: '',
     about_lead_credentials: 'Ashish Manral is a Licensed Regulated Canadian Immigration Consultant (RCIC) registered with the College of Immigration and Citizenship Consultants (CICC). With extensive knowledge of Canadian immigration law and procedures, he is authorized to represent clients before Immigration, Refugees and Citizenship Canada (IRCC).',
     about_lead_expertise: [
         'Express Entry & Provincial Nominee Programs (PNP)',
@@ -162,7 +162,9 @@ export default async function AboutPage() {
                                                 </div>
                                             )}
                                             <h3 className="text-2xl font-bold mb-1">{data.about_lead_name}</h3>
-                                            <p className="text-blue-200 font-medium mb-1">{data.about_lead_title}</p>
+                                            {data.about_lead_title && (
+                                                <p className="text-blue-200 font-medium mb-1">{data.about_lead_title}</p>
+                                            )}
                                             {data.about_lead_rcic_number && (
                                                 <p className="text-sm text-white/80 bg-white/10 px-3 py-1 rounded-full inline-block">
                                                     {data.about_lead_rcic_number}
